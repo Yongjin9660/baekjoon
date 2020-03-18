@@ -1,5 +1,4 @@
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,64 +7,26 @@ import java.util.Scanner;
 public class q_1009 {
 
 	public static void main(String[] args) throws IOException {
-		//Scanner sc = new Scanner(System.in);
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
 
-		while (true) {
-			String input = br.readLine();
-			int small = 0;
-			int big = 0;
-			int check = 0;
-			boolean no = false;
-			if (input.equals("."))
-				break;
+		int a;
+		int b;
+		int temp;
+		for (int i = 0; i < n; i++) {
+			a = sc.nextInt();
+			b = sc.nextInt();
+			temp = a%10;
 
-			char[] arr = input.toCharArray();
-
-			for (char c : arr) {
-				
-				if (c == '(') {
-					small++;
-					check=1;
-				}
-					
-				if (c == '[') {
-					big++;
-					check=-1;
-				}
-				
-				if (c == ')') {
-					if(check != 1) {
-						System.out.println("no");
-						no=true;
-						break;
-					}
-					small--;
-				}
-					
-				if (c == ']') {
-					if(check != -1) {
-						System.out.println("no");
-						no=true;
-						break;
-					}
-					big--;
-				}
-					
-				
-				if (small < 0 || big < 0) {
-					System.out.println("no");
-					no=true;
-					break;
-				}
-
-
-
+			for (int j = 2; j <= b; j++) {
+				temp = temp * a;
+				temp = temp % 10;
 			}
 
-			if (small == 0 && big == 0 && no != true)
-				System.out.println("yes");
+			if (temp == 0)
+				System.out.println("10");
+			else
+				System.out.println(temp);
 
 		}
 

@@ -1,39 +1,35 @@
 
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class one_1463 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
 
-	public static void main(String[] args) throws IOException{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int n = Integer.parseInt(br.readLine());
+		int[] dp = new int[n + 1];
 		
-		int temp;
-		boolean check = false;
-		int result=0;
-		
-		while(n != 1) {
-			if(n%2 != 0 && n%3 != 0)
-				n--;
-			else if(n%3 == 0)
-				n/=3;
-			else {
-				temp = n-1;
-				for(int i = 2 ; i < 15 ; i++) {
-					if(Math.pow(3,i) == temp){
-						check = true;
-						break;
-					}
-				}
-				if(check) n--;
-				else n/=2;
+		dp[1] = 0;
+
+		for (int i = 2; i <= n; i++) {
+
+			if (i % 2 == 0 && i % 3 == 0) {
+				dp[i] = Math.min(dp[i / 2], dp[i / 3]);
+				dp[i] = Math.min(dp[i], dp[i - 1]);
+			} else if (i % 2 != 0 && i % 3 == 0) {
+				dp[i] = Math.min(dp[i / 3], dp[i - 1]);
+			} else if (i % 2 == 0 && i % 3 != 0) {
+				dp[i] = Math.min(dp[i / 2], dp[i - 1]);
+			} else {
+				dp[i] = dp[i - 1];
 			}
-			result++;
+			
+			dp[i]++;
+			
 		}
-		
-		System.out.println(result);
+
+		System.out.println(dp[n]);
+
 	}
 
 }
