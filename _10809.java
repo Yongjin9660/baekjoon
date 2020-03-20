@@ -2,7 +2,7 @@
 
 import java.util.Scanner;
 
-public class alphabet_10809 {
+public class _10809 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

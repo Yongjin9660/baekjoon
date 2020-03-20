@@ -2,7 +2,7 @@
 
 import java.util.Scanner;
 
-public class ascii_11654 {
+public class _11654 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

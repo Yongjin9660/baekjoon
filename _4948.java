@@ -3,7 +3,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class bae_4948 {
+public class _4948 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		while(true) {
