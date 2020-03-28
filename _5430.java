@@ -6,89 +6,67 @@ import java.util.Deque;
 
 public class _5430 {
 	public static void main(String[] args) throws IOException {
-
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
-
 		int testcase = Integer.parseInt(br.readLine());
 
-		for (int k = 0; k < testcase; k++) {
-			String command = br.readLine();
-			char[] commandArr = command.toCharArray();
+		for (int i = 0; i < testcase; i++) {
+			String[] command = br.readLine().split("");
 
 			int n = Integer.parseInt(br.readLine());
 
-			String input = br.readLine();
+			String[] arr = br.readLine().replace("[", "").replace("]", "").split(",");
 
-			if (n == 0) {
-				boolean a = true;
-				for (int i = 0; i < commandArr.length; i++) {
-					if (commandArr[i] == 'R')
-						continue;
-					else {
-						sb.append("error\n");
-						a = false;
-						break;
-					}
-				}
-				if (a)
-					sb.append("[]\n");
+			ac(command, n, arr);
+
+		}
+
+	}
+
+	private static void ac(String[] command, int n, String[] arr) {
+		Deque<Integer> dq = new ArrayDeque<>();
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < n; i++)
+			dq.add(Integer.parseInt(arr[i]));
+
+		String dir = "left";
+
+		for (String order : command) {
+			if ("R".equals(order)) {
+				if (dir.equals("left"))
+					dir = "right";
+				else
+					dir = "left";
 			} else {
-				input = input.replace("[", "").replace("]", "");
-				String[] token = input.split(",");
-
-				Deque<Integer> de = new ArrayDeque<>();
-
-				for (int i = 0; i < token.length; i++)
-					de.add(Integer.parseInt(token[i]));
-
-				int index = 0;
-				boolean ok = true;
-
-				for (int i = 0; i < commandArr.length; i++) {
-					if (commandArr[i] == 'R') {
-						if (index == 0)
-							index = de.size() - 1;
-						else
-							index = 0;
-					} else {
-						if (de.isEmpty()) {
-							sb.append("error\n");
-							ok = false;
-							break;
-						}
-						if (index == 0)
-							de.pollFirst();
-						else
-							de.pollLast();
-					}
+				if (dq.isEmpty()) {
+					sb.append("error");
+					System.out.println(sb);
+					return;
+				} else {
+					if (dir.equals("left"))
+						dq.pollFirst();
+					else
+						dq.pollLast();
 				}
 
-				int len = de.size();
-
-				if (ok) {
-					sb.append('[');
-
-					if (index == 0) {
-						for (int i = 0; i < len; i++) {
-							if (i == len - 1)
-								sb.append(de.pollFirst() + "]\n");
-							else
-								sb.append(de.pollFirst() + ",");
-						}
-
-					} else {
-						for (int i = 0; i < len; i++) {
-							if (i == len - 1)
-								sb.append(de.pollLast() + "]\n");
-							else
-								sb.append(de.pollLast() + ",");
-						}
-					}
-
-				}
 			}
 		}
+
+		int dqlen = dq.size();
+		sb.append("[");
+
+		for (int i = 0; i < dqlen; i++) {
+			if (dir.equals("left"))
+				sb.append(dq.pollFirst());
+			else
+				sb.append(dq.pollLast());
+			if (!dq.isEmpty())
+				sb.append(",");
+		}
+		sb.append("]");
 		System.out.println(sb);
+		return;
+
 	}
+
 }
