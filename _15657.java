@@ -4,26 +4,26 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class _15656 {
+public class _15657 {
 
 	static int n, m;
 	static int arr[];
 	static int input[];
 	static StringBuilder sb = new StringBuilder();
 
-	static private void dfs(int d) {
+	static private void dfs(int current, int d) {
 
 		if (d == m) {
-			for (int a : arr)
-				sb.append(a + " ");
+			for (int i : arr)
+				sb.append(i + " ");
 			sb.append("\n");
 			return;
 		}
 
-		for (int i = 0; i < n; i++) {
-			int temp = input[i];
+		for (int i = current; i <= n; i++) {
+			int temp = input[i - 1];
 			arr[d] = temp;
-			dfs(d + 1);
+			dfs(i, d + 1);
 		}
 
 	}
@@ -35,9 +35,9 @@ public class _15656 {
 		n = Integer.parseInt(st.nextToken());
 		m = Integer.parseInt(st.nextToken());
 
-		input = new int[n];
 		arr = new int[m];
 
+		input = new int[n];
 		st = new StringTokenizer(br.readLine());
 
 		for (int i = 0; i < n; i++)
@@ -45,9 +45,9 @@ public class _15656 {
 
 		Arrays.parallelSort(input);
 
-		dfs(0);
-
+		dfs(1, 0);
 		System.out.println(sb);
+
 	}
 
 }
