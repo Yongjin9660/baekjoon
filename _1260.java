@@ -34,7 +34,7 @@ public class _1260 {
 			sb2.append(temp + " ");
 			for (int j = 1; j <= n; j++) {
 				if (map[temp][j] == 1 && visit[j] == false) {
-					q.offer(j);
+					q.add(j);
 					visit[j] = true;
 				}
 			}
