@@ -42,9 +42,9 @@ public class _11404 {
 			int start = Integer.parseInt(st.nextToken());
 			int end = Integer.parseInt(st.nextToken());
 			int cost = Integer.parseInt(st.nextToken());
-			
+
 			matrix[start][end] = Math.min(cost, matrix[start][end]);
-			
+
 		}
 
 		floyd();
